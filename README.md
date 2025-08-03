@@ -1,3 +1,3 @@
 # Twenty Questions 
 
-Play against Gen AI...
+Play the classic guessing game against AI 

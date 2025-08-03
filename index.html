@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20 Questions - AI Game</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Game Setup Screen -->
+    <div id="setup-screen" class="screen active">
+        <div class="container">
+            <header class="game-header">
+                <h1>🎯 20 Questions</h1>
+                <p>Play the classic guessing game against AI</p>
+            </header>
+
+            <div class="setup-form">
+                <div class="setup-section">
+                    <h3>Who's guessing?</h3>
+                    <div class="role-buttons">
+                        <button class="role-btn" data-role="user-guesses">
+                            <span class="role-icon">🤔</span>
+                            <span class="role-title">I want to guess</span>
+                            <span class="role-desc">AI picks something, you ask questions</span>
+                        </button>
+                        <button class="role-btn" data-role="ai-guesses">
+                            <span class="role-icon">🤖</span>
+                            <span class="role-title">AI should guess</span>
+                            <span class="role-desc">You think of something, AI asks questions</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="setup-section">
+                    <h3>Choose a theme</h3>
+                    <button id="general-theme-btn" class="theme-btn general-btn">
+                        🌟 General (Recommended)
+                    </button>
+                    <div class="custom-theme">
+                        <label for="custom-theme-input">Or enter your own theme:</label>
+                        <input 
+                            type="text" 
+                            id="custom-theme-input" 
+                            placeholder="e.g., Disney movies, dog breeds, space objects"
+                            maxlength="50"
+                        >
+                        <div id="theme-validation" class="validation-message"></div>
+                    </div>
+                </div>
+
+                <div class="setup-section">
+                    <h3>Difficulty</h3>
+                    <div class="difficulty-slider">
+                        <input type="range" id="difficulty" min="1" max="3" value="2">
+                        <div class="difficulty-labels">
+                            <span>Easy</span>
+                            <span>Medium</span>
+                            <span>Hard</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="start-game-btn" class="start-btn" disabled>
+                    Start Game
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <div class="container">
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Progress</span>
+                    <span id="progress-percentage">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <!-- Game Info -->
+            <div class="game-info">
+                <div class="info-item">
+                    <span class="info-label">Questions:</span>
+                    <span id="question-count">0/20</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Theme:</span>
+                    <span id="current-theme">General</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Mode:</span>
+                    <span id="current-mode">You're guessing</span>
+                </div>
+            </div>
+
+            <!-- Game Content -->
+            <div class="game-content">
+                <div id="conversation" class="conversation">
+                    <!-- Messages will be added here dynamically -->
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div id="user-input-container" class="input-container">
+                        <input 
+                            type="text" 
+                            id="user-input" 
+                            placeholder="Ask a yes/no question..."
+                            maxlength="200"
+                        >
+                        <button id="send-btn" class="send-btn">Send</button>
+                    </div>
+                    
+                    <div id="ai-response-container" class="response-container" style="display: none;">
+                        <div class="response-buttons">
+                            <button class="response-btn" data-response="yes">Yes</button>
+                            <button class="response-btn" data-response="no">No</button>
+                            <button class="response-btn" data-response="sometimes">Sometimes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Controls -->
+            <div class="game-controls">
+                <button id="make-guess-btn" class="control-btn">Make Final Guess</button>
+                <button id="give-up-btn" class="control-btn secondary">Give Up</button>
+                <button id="new-game-btn" class="control-btn secondary">New Game</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Score Dashboard -->
+    <div id="score-screen" class="screen">
+        <div class="container">
+            <header class="score-header">
+                <h2>📊 Score Dashboard</h2>
+            </header>
+
+            <div class="score-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="games-played">0</div>
+                    <div class="stat-label">Games Played</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="games-won">0</div>
+                    <div class="stat-label">Games Won</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="win-percentage">0%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+            </div>
+
+            <div class="score-actions">
+                <button id="play-again-btn" class="start-btn">Play Again</button>
+                <button id="reset-scores-btn" class="control-btn secondary">Reset Scores</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Thinking...</div>
+    </div>
+
+    <script src="scripts/game.js"></script>
+    <script src="scripts/api.js"></script>
+    <script src="scripts/ui.js"></script>
+</body>
+</html>
