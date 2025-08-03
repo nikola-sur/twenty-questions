@@ -346,10 +346,11 @@ class TwentyQuestionsGame {
         container.innerHTML = `
             <div class="response-buttons">
                 <button class="response-btn" onclick="game.handleGuessResponse(true)">Yes, you guessed it!</button>
+            </div>
+            <div class="response-buttons">
                 <button class="response-btn" data-response="yes">Yes</button>
                 <button class="response-btn" data-response="no">No</button>
                 <button class="response-btn" data-response="sometimes">Sometimes</button>
-                <button class="response-btn" onclick="game.handleGuessResponse(false)">No, keep guessing</button>
             </div>
         `;
         container.style.display = 'block';
@@ -491,8 +492,21 @@ class TwentyQuestionsGame {
     }
 
     setupAIInput() {
+        const container = document.getElementById('ai-response-container');
+        container.innerHTML = `
+            <div class="response-buttons">
+                <button class="response-btn" data-response="yes">Yes</button>
+                <button class="response-btn" data-response="no">No</button>
+                <button class="response-btn" data-response="sometimes">Sometimes</button>
+            </div>
+        `;
+        container.style.display = 'block';
         document.getElementById('user-input-container').style.display = 'none';
-        document.getElementById('ai-response-container').style.display = 'block';
+
+        // Add event listeners for the buttons
+        container.querySelectorAll('button[data-response]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.respondToAI(e.target.dataset.response));
+        });
     }
 
     addMessage(type, content) {
@@ -516,6 +530,18 @@ class TwentyQuestionsGame {
         document.getElementById('current-mode').textContent = 
             this.gameState.mode === 'user-guesses' ? "You're guessing" : "AI is guessing";
         this.updateQuestionCount();
+
+        // Hide "Make Final Guess" button if AI is guessing
+        const makeGuessBtn = document.getElementById('make-guess-btn');
+        if (this.gameState.mode === 'ai-guesses') {
+            makeGuessBtn.style.display = 'none';
+        } else {
+            makeGuessBtn.style.display = 'inline-block';
+        }
+
+        // Always hide "Give Up" button
+        const giveUpBtn = document.getElementById('give-up-btn');
+        giveUpBtn.style.display = 'none';
     }
 
     updateQuestionCount() {
