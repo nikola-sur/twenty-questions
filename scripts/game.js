@@ -345,27 +345,36 @@ class TwentyQuestionsGame {
         const container = document.getElementById('ai-response-container');
         container.innerHTML = `
             <div class="response-buttons">
-                <button class="response-btn" onclick="game.handleGuessResponse(true)">Yes, that's it!</button>
+                <button class="response-btn" onclick="game.handleGuessResponse(true)">Yes, you guessed it!</button>
+                <button class="response-btn" data-response="yes">Yes</button>
+                <button class="response-btn" data-response="no">No</button>
+                <button class="response-btn" data-response="sometimes">Sometimes</button>
                 <button class="response-btn" onclick="game.handleGuessResponse(false)">No, keep guessing</button>
             </div>
         `;
         container.style.display = 'block';
         document.getElementById('user-input-container').style.display = 'none';
+
+        // Add event listeners for the new buttons
+        container.querySelectorAll('button[data-response]').forEach(btn => {
+            btn.addEventListener('click', (e) => this.respondToAI(e.target.dataset.response));
+        });
     }
 
     // Handle guess response
     async handleGuessResponse(correct) {
-        document.getElementById('ai-response-container').style.display = 'none';
         if (this.gameState.mode === 'user-guesses') {
+            document.getElementById('ai-response-container').style.display = 'none';
             document.getElementById('user-input-container').style.display = 'flex';
             this.setupUserInput();
         } else if (this.gameState.mode === 'ai-guesses') {
-            // In AI guess mode, keep AI response container hidden and show user input container only if needed
+            // In AI guess mode, keep AI response container visible and hide user input container
+            document.getElementById('ai-response-container').style.display = 'block';
             document.getElementById('user-input-container').style.display = 'none';
         }
         
         if (correct) {
-            this.addMessage('user', 'Yes, that\'s it!');
+            this.addMessage('user', 'Yes, you guessed it!');
             this.endGame(false, 'I guessed it! Great game!');
         } else {
             this.addMessage('user', 'No, keep guessing');
