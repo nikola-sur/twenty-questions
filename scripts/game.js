@@ -241,6 +241,7 @@ class TwentyQuestionsGame {
             this.updateQuestionCount();
             this.updateProgress(await this.calculateProgress());
             this.showLoading(false);
+            this.setupAIInput();
         } catch (error) {
             console.error('Error getting AI question:', error);
             this.showLoading(false);
@@ -355,7 +356,13 @@ class TwentyQuestionsGame {
     // Handle guess response
     async handleGuessResponse(correct) {
         document.getElementById('ai-response-container').style.display = 'none';
-        document.getElementById('user-input-container').style.display = 'flex';
+        if (this.gameState.mode === 'user-guesses') {
+            document.getElementById('user-input-container').style.display = 'flex';
+            this.setupUserInput();
+        } else if (this.gameState.mode === 'ai-guesses') {
+            // In AI guess mode, keep AI response container hidden and show user input container only if needed
+            document.getElementById('user-input-container').style.display = 'none';
+        }
         
         if (correct) {
             this.addMessage('user', 'Yes, that\'s it!');
