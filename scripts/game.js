@@ -189,7 +189,7 @@ class TwentyQuestionsGame {
                 Difficulty level: ${this.getDifficultyDescription()}
                 
                 Respond with just the object/item you've chosen, nothing else. Make it ${this.gameState.difficulty === 1 ? 'easy and well-known' : this.gameState.difficulty === 2 ? 'moderately challenging' : 'difficult and obscure'}.`
-            }]);
+            }], { temperature: 1.0 });
 
             this.gameState.currentObject = response.trim();
             
