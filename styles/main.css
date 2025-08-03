@@ -315,14 +315,21 @@ body {
 }
 
 /* Conversation */
+.game-content {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 200px);
+}
+
 .conversation {
     background: white;
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
-    min-height: 300px;
-    max-height: 400px;
+    flex-grow: 1;
     overflow-y: auto;
+    height: auto;
+    min-height: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
