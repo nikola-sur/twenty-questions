@@ -256,6 +256,16 @@ class TwentyQuestionsGame {
         
         if (!message || !this.gameState.gameActive) return;
 
+        // Validate if question is yes/no
+        if (this.gameState.mode === 'user-guesses') {
+            const isYesNo = await this.isYesNoQuestion(message);
+            if (!isYesNo) {
+                this.addMessage('system', 'Please ask a yes/no question.');
+                input.value = '';
+                return;
+            }
+        }
+
         input.value = '';
         this.addMessage('user', message);
         this.gameState.questionCount++;
@@ -289,6 +299,20 @@ class TwentyQuestionsGame {
             console.error('Error getting AI response:', error);
             this.showLoading(false);
             this.addMessage('system', 'Sorry, I had trouble responding. Please try again.');
+        }
+    }
+
+    async isYesNoQuestion(question) {
+        try {
+            const response = await callOpenAI([{
+                role: 'system',
+                content: `Is the following question a yes/no question? Answer with "YES" or "NO" only.\n\nQuestion: "${question}"`
+            }]);
+            return response.trim().toUpperCase() === 'YES';
+        } catch (error) {
+            console.error('Error validating question type:', error);
+            // Default to true to avoid blocking gameplay on error
+            return true;
         }
     }
 
