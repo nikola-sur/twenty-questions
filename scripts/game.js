@@ -324,6 +324,12 @@ class TwentyQuestionsGame {
         
         // Update progress and continue
         this.updateProgress(await this.calculateProgress());
+
+        // If user responded "I don't know", do not increment question count, just ask another question
+        if (response === 'idk') {
+            await this.askAIQuestion();
+            return;
+        }
         
         // Check if AI wants to make a guess
         if (this.gameState.questionCount >= 15 || Math.random() < 0.3) {
@@ -522,6 +528,7 @@ class TwentyQuestionsGame {
                 <button class="response-btn" data-response="yes">Yes</button>
                 <button class="response-btn" data-response="no">No</button>
                 <button class="response-btn" data-response="sometimes">Sometimes</button>
+                <button class="response-btn" data-response="idk">I don't know</button>
             </div>
         `;
         container.style.display = 'block';

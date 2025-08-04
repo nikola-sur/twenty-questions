@@ -288,10 +288,26 @@ body {
 
 /* Game Info */
 .game-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 15px;
     margin-bottom: 20px;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info-item {
+    flex: 1;
+    text-align: center;
+    padding: 0 10px;
+    border-right: 1px solid #e8ecef;
+}
+
+.info-item:last-child {
+    border-right: none;
 }
 
 .info-item {
@@ -371,44 +387,80 @@ body {
 
 /* Input Area */
 .input-area {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .input-container {
+    position: relative;
     display: flex;
-    gap: 10px;
     background: white;
-    padding: 15px;
+    padding: 0;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .input-container input {
     flex: 1;
     padding: 12px 16px;
-    border: 2px solid #e8ecef;
-    border-radius: 8px;
+    border: none;
     font-size: 1rem;
-}
-
-.input-container input:focus {
-    outline: none;
-    border-color: #3498db;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+    z-index: 1;
+    background-clip: padding-box;
+    border-radius: 12px 0 0 12px;
 }
 
 .send-btn {
     background: #3498db;
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: 12px 20px;
-    font-weight: 500;
+    border-radius: 0 12px 12px 0;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    user-select: none;
+    font-family: Arial, sans-serif;
+    box-shadow: none;
 }
 
 .send-btn:hover {
     background: #2980b9;
+}
+
+.send-btn:disabled {
+    background: #bdc3c7;
+    color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+.send-btn::before {
+    content: '▶';
+    display: block;
+    transform: translateX(1px);
+}
+
+.send-btn:hover {
+    background: rgba(52, 152, 219, 0.1);
+    color: #2980b9;
+}
+
+.send-btn:disabled {
+    color: #bdc3c7;
+    cursor: not-allowed;
+    background: transparent;
 }
 
 .send-btn:disabled {
@@ -569,6 +621,9 @@ body {
 @media (max-width: 768px) {
     .container {
         padding: 15px;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
     }
     
     .game-header h1 {
@@ -584,7 +639,48 @@ body {
     }
     
     .game-info {
-        grid-template-columns: 1fr;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        height: 40px;
+        overflow: hidden;
+    }
+    
+    .info-item {
+        flex: 1;
+        text-align: center;
+        padding: 0 5px;
+        border-right: 1px solid #e8ecef;
+        font-size: 0.85rem;
+        line-height: 40px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    
+    .info-item:last-child {
+        border-right: none;
+    }
+    
+    .info-label {
+        display: none;
+    }
+    
+    .info-item span:last-child {
+        font-weight: 500;
+        color: #2c3e50;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     
     .response-buttons {
@@ -592,7 +688,17 @@ body {
     }
     
     .game-controls {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .control-btn {
+        flex: 1;
+        padding: 12px 0;
+        font-size: 1rem;
     }
     
     .score-actions {
@@ -600,11 +706,56 @@ body {
     }
     
     .input-container {
-        flex-direction: column;
+        flex-direction: row;
     }
     
     .send-btn {
-        align-self: stretch;
+        align-self: center;
+        width: 48px;
+        height: 48px;
+    }
+
+    .game-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    .conversation {
+        flex-grow: 1;
+        min-height: 0;
+        max-height: none;
+        margin-bottom: 10px;
+        overflow-y: auto;
+    }
+
+    .input-area {
+        flex-shrink: 0;
+        margin-bottom: 15px;
+    }
+
+    .progress-container {
+        margin-bottom: 10px;
+        padding: 10px 15px;
+        height: 20px;
+        position: relative;
+    }
+
+.progress-label {
+    font-size: 0.75rem;
+    margin: 0;
+    line-height: 20px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: #2c3e50;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+    .progress-bar {
+        height: 6px;
     }
 }
 
@@ -614,8 +765,8 @@ body {
     }
     
     .conversation {
-        min-height: 250px;
-        max-height: 300px;
+        min-height: 300px;
+        max-height: none;
     }
     
     .message {

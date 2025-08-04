@@ -41,6 +41,7 @@ exports.handler = async function(event, context) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${OPENAI_API_KEY}`,
             },
+
             body: JSON.stringify({
                 model: 'gpt-4.1-mini',
                 messages: messages,
