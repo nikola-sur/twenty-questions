@@ -318,18 +318,6 @@ body {
     text-align: center;
 }
 
-.info-label {
-    display: block;
-    font-size: 0.85rem;
-    color: #7f8c8d;
-    margin-bottom: 5px;
-}
-
-.info-item span:last-child {
-    font-weight: 500;
-    color: #2c3e50;
-}
-
 /* Conversation */
 .game-content {
     display: flex;
@@ -444,6 +432,7 @@ body {
     background: #bdc3c7;
     color: #7f8c8d;
     cursor: not-allowed;
+    transform: none;
 }
 
 .send-btn::before {
@@ -609,12 +598,6 @@ body {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-.loading-text {
-    font-size: 1.1rem;
-    color: #7f8c8d;
-    font-weight: 500;
 }
 
 /* Mobile Responsiveness */
@@ -833,5 +816,12 @@ input:focus {
         align-items: center;
         flex-direction: column;
         line-height: 1.4;
+    }
+}
+
+/* Adjust game-content height slightly smaller on desktop */
+@media (min-width: 769px) {
+    .game-content {
+        height: calc(100vh - 270px);
     }
 }
