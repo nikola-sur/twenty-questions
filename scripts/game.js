@@ -195,7 +195,7 @@ class TwentyQuestionsGame {
                 
                 Respond with just the object/item you've chosen, nothing else. Make it ${this.gameState.difficulty === 1 ? 'easy and well-known' : this.gameState.difficulty === 2 ? 'moderately challenging' : 'difficult and obscure'}.
                 
-                Be creative and avoid repeating common or recent objects.`
+                E CREATIVE AND AVOID REPEATING COMMON OR RECENT OBJECTS. THIS IS VERY IMPORTANT! PICK RANDOMLY (WITHIN THE CONSTRAINTS OF THE THEME).`
             }], { temperature: 1.0 });
 
             this.gameState.currentObject = response.trim();
@@ -242,7 +242,8 @@ class TwentyQuestionsGame {
                 
                 Question ${this.gameState.questionCount + 1}/20. Ask a yes/no question to narrow down what they're thinking of. Be strategic and build on previous answers.
                 
-                Be creative and avoid repeating questions you've asked before.`
+                BE CREATIVE AND AVOID REPEATING QUESTIONS YOU'VE ASKED BEFORE. THIS IS VERY IMPORTANT! PICK A QUESTION TO ASK AT RANDOM (WITHIN THE CONSTRAINTS OF THE THEME)
+                BUT ALSO MAKE SURE THAT IT IS AN INTELLIGENT/INFORMED QUESTION (RELATIVE TO THE SPECIFIED DIFFICULTY LEVEL).`
             }], { temperature: 1.0 });
 
             this.addMessage('ai', response);
