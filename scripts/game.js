@@ -16,6 +16,11 @@ class TwentyQuestionsGame {
         this.scores = this.loadScores();
         this.setupEventListeners();
         this.initializeGame();
+
+        // Add window resize listener to update game info for responsive text
+        window.addEventListener('resize', () => {
+            this.updateGameInfo();
+        });
     }
 
     // Initialize the game
@@ -558,8 +563,12 @@ class TwentyQuestionsGame {
 
     updateGameInfo() {
         document.getElementById('current-theme').textContent = this.gameState.theme;
-        document.getElementById('current-mode').textContent = 
-            this.gameState.mode === 'user-guesses' ? "You're guessing" : "AI is guessing";
+        const isMobile = window.innerWidth < 750;
+        if (this.gameState.mode === 'user-guesses') {
+            document.getElementById('current-mode').textContent = "You're guessing";
+        } else {
+            document.getElementById('current-mode').textContent = isMobile ? "AI guessing" : "AI is guessing";
+        }
         this.updateQuestionCount();
 
         // Hide "Make Final Guess" button if AI is guessing
@@ -573,6 +582,12 @@ class TwentyQuestionsGame {
         // Always hide "Give Up" button
         const giveUpBtn = document.getElementById('give-up-btn');
         giveUpBtn.style.display = 'none';
+
+        // Hide progress label and percentage on mobile, show on desktop
+        const progressLabel = document.querySelector('.progress-label');
+        if (progressLabel) {
+            progressLabel.style.display = isMobile ? 'none' : 'flex';
+        }
     }
 
     updateQuestionCount() {
