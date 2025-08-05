@@ -804,3 +804,34 @@ input:focus {
         border-width: 2px;
     }
 }
+
+/* Hide main content on mobile devices in landscape orientation */
+@media (max-width: 768px) and (orientation: landscape) {
+    #setup-screen,
+    #game-screen,
+    #score-screen {
+        display: none !important;
+    }
+
+    /* Show the landscape overlay message */
+    #landscape-overlay {
+        display: flex !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: white;
+        color: #2c3e50;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        text-align: center;
+        padding: 2rem;
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        line-height: 1.4;
+    }
+}
