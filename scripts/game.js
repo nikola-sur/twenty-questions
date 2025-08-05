@@ -193,7 +193,9 @@ class TwentyQuestionsGame {
                 
                 Difficulty level: ${this.getDifficultyDescription()}
                 
-                Respond with just the object/item you've chosen, nothing else. Make it ${this.gameState.difficulty === 1 ? 'easy and well-known' : this.gameState.difficulty === 2 ? 'moderately challenging' : 'difficult and obscure'}.`
+                Respond with just the object/item you've chosen, nothing else. Make it ${this.gameState.difficulty === 1 ? 'easy and well-known' : this.gameState.difficulty === 2 ? 'moderately challenging' : 'difficult and obscure'}.
+                
+                Be creative and avoid repeating common or recent objects.`
             }], { temperature: 1.0 });
 
             this.gameState.currentObject = response.trim();
@@ -238,8 +240,10 @@ class TwentyQuestionsGame {
                 Previous conversation:
                 ${conversationHistory}
                 
-                Question ${this.gameState.questionCount + 1}/20. Ask a yes/no question to narrow down what they're thinking of. Be strategic and build on previous answers.`
-            }]);
+                Question ${this.gameState.questionCount + 1}/20. Ask a yes/no question to narrow down what they're thinking of. Be strategic and build on previous answers.
+                
+                Be creative and avoid repeating questions you've asked before.`
+            }], { temperature: 1.0 });
 
             this.addMessage('ai', response);
             this.gameState.questionCount++;

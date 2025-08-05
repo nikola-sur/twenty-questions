@@ -2,15 +2,15 @@
 
 const OPENAI_API_PROXY_URL = '/.netlify/functions/openai-proxy';
 
-// Call OpenAI API via Netlify function proxy
-async function callOpenAI(messages) {
+async function callOpenAI(messages, options = {}) {
     try {
+        const body = { messages, ...options };
         const response = await fetch(OPENAI_API_PROXY_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ messages })
+            body: JSON.stringify(body)
         });
 
         if (!response.ok) {
