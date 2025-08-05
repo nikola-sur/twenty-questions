@@ -385,6 +385,8 @@ class TwentyQuestionsGame {
             }]);
 
             this.addMessage('ai', response);
+            this.gameState.questionCount++;
+            this.updateQuestionCount();
             this.showLoading(false);
             
             // Show special response buttons for guess
