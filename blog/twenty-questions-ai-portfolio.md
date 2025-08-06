@@ -17,13 +17,15 @@ The game offers two modes:
 
 Players can choose a general theme or enter a custom theme. The general theme is recommended and must be selected by clicking the blue button, which then turns green to indicate activation before starting the game.
 
-![Theme Selection Screen](../blog/screenshots/theme-selection.png)
-
 ### Asking Questions and Making Guesses
 
 In user guess mode, the player types yes/no questions, and the AI responds truthfully with "Yes", "No", or "Sometimes". The AI carefully avoids lying and provides accurate answers based on the chosen object.
 
+![User Guessing Mode](./img/user_guessing.png)
+
 In AI guess mode, the AI asks strategic yes/no questions, and the player responds using buttons for "Yes", "No", "Sometimes", or "I don't know". The AI uses the conversation history to make informed guesses.
+
+![AI Guessing Mode](./img/ai_guessing.png)
 
 ## Key Features and Technical Highlights
 
@@ -106,11 +108,15 @@ async askAIQuestion() {
 
 ### Initial Setup Screen
 
-![Initial Setup](../blog/screenshots/setup-screen.png)
+![Initial Setup](./img/main.png)
+
+### Mobile View
+
+![Mobile View](./img/mobile.png)
 
 ### Theme Selection with General Theme Activated
 
-![Theme Activated](../blog/screenshots/theme-activated.png)
+![Theme Activated](./img/main.png)
 
 ## Conclusion
 
