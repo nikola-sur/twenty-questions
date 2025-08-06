@@ -375,11 +375,17 @@ class TwentyQuestionsGame {
                 .map(msg => `${msg.type === 'ai' ? 'AI' : 'User'}: ${msg.content}`)
                 .join('\n');
 
+            const themeInstruction = this.gameState.theme !== 'General' 
+                ? `Only guess objects related to the theme: ${this.gameState.theme}.` 
+                : '';
+
             const response = await callOpenAI([{
                 role: 'system',
                 content: `Based on this 20 questions conversation, make your best guess at what the user is thinking of:
                 
                 ${conversationHistory}
+                
+                ${themeInstruction}
                 
                 Respond with: "Is it [your guess]?" - make only one specific guess.`
             }]);
