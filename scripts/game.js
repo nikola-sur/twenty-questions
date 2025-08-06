@@ -387,6 +387,14 @@ class TwentyQuestionsGame {
             this.addMessage('ai', response);
             this.gameState.questionCount++;
             this.updateQuestionCount();
+
+            // Check if max questions reached after incrementing
+            if (this.gameState.questionCount >= this.gameState.maxQuestions) {
+                this.endGame(false, "I couldn't guess it in 20 questions! What were you thinking of?");
+                this.showLoading(false);
+                return;
+            }
+
             this.showLoading(false);
             
             // Show special response buttons for guess
