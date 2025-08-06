@@ -281,6 +281,10 @@ class TwentyQuestionsGame {
         this.gameState.questionCount++;
         this.updateQuestionCount();
 
+        if (this.gameState.questionCount === this.gameState.maxQuestions - 1) {
+            this.addMessage('system', 'This is your last question! After this, you need to make a guess or the game will be over.');
+        }
+
         if (this.gameState.questionCount >= this.gameState.maxQuestions) {
             this.endGame(false, `You've used all 20 questions! The answer was: ${this.gameState.currentObject}`);
             return;
