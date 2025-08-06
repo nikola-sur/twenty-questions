@@ -362,7 +362,10 @@ class TwentyQuestionsGame {
         }
         
         // Check if AI wants to make a guess
-        if (this.gameState.questionCount >= 15 || Math.random() < 0.3) {
+        // Only start guessing after question 16, and reduce random chance before that
+        if (this.gameState.questionCount >= 16 || 
+            (this.gameState.questionCount >= 5 && this.gameState.questionCount <= 9 && Math.random() < 0.1) || 
+            (this.gameState.questionCount >= 10 && this.gameState.questionCount <= 15 && Math.random() < 0.3)) {
             await this.aiMakeGuess();
         } else {
             await this.askAIQuestion();
