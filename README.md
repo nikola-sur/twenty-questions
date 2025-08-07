@@ -9,7 +9,7 @@
 
 ## Introduction
 
-This project is a modern take on the classic "20 Questions" guessing game, powered by AI. It allows you to play either as the guesser or the answerer, challenging an AI to guess your object or guessing the AI's chosen object by asking yes/no questions. This interactive game showcases AI integration, natural language processing, and dynamic gameplay mechanics, making it a perfect addition to an AI engineer's portfolio.
+This project is a modern take on the classic "20 Questions" guessing game, powered by AI. It allows you to play either as the guesser or the answerer, challenging an AI to guess your object or guessing the AI's chosen object by asking yes/no questions. This interactive game showcases AI integration, natural language processing, and dynamic gameplay mechanics.
 
 ## Gameplay Overview
 
@@ -20,17 +20,22 @@ The game offers two modes:
 
 ### Theme Selection
 
-Players can choose a general theme or enter a custom theme. The general theme is recommended and must be selected by clicking the blue button, which then turns green to indicate activation before starting the game.
+Players can choose a general theme or enter a custom theme.
 
 ### Asking Questions and Making Guesses
 
 In user guess mode, the player types yes/no questions, and the AI responds truthfully with "Yes", "No", or "Sometimes". The AI carefully avoids lying and provides accurate answers based on the chosen object.
 
-![User Guessing Mode](./img/user_guessing.png)
+<p align="center">
+    <img src="blog/img/user_guessing.png" alt="User is guessing" width="400"/>
+</p>
 
 In AI guess mode, the AI asks strategic yes/no questions, and the player responds using buttons for "Yes", "No", "Sometimes", or "I don't know". The AI uses the conversation history to make informed guesses.
 
-![AI Guessing Mode](./img/ai_guessing.png)
+<p align="center">
+    <img src="blog/img/ai_guessing.png" alt="AI is guessing" width="400"/>
+</p>
+
 
 ## Key Features and Technical Highlights
 
@@ -39,7 +44,7 @@ In AI guess mode, the AI asks strategic yes/no questions, and the player respond
 - **Difficulty Levels:** Three difficulty levels adjust the complexity of objects and questions.
 - **Progress Tracking:** The game estimates progress toward guessing the object using AI analysis of the conversation.
 - **Responsive UI:** The interface adapts to different screen sizes and devices for a smooth user experience.
-- **Score Management:** Tracks games played and won, with local storage persistence.
+
 
 ## Code Snippets
 
@@ -65,24 +70,6 @@ class TwentyQuestionsGame {
 }
 ```
 
-### Theme Selection and Validation
-
-```javascript
-selectGeneralTheme() {
-    const btn = document.getElementById('general-theme-btn');
-    btn.classList.add('selected');
-    this.gameState.theme = 'General';
-    this.checkStartButtonState();
-}
-
-async validateThemeWithAI(theme) {
-    const response = await callOpenAI([{
-        role: 'system',
-        content: `Is "${theme}" appropriate for a family-friendly 20 questions game?`
-    }]);
-    return response.trim().toUpperCase() === 'YES';
-}
-```
 
 ### AI Asking Questions
 
@@ -113,19 +100,16 @@ async askAIQuestion() {
 
 ### Initial Setup Screen
 
-![Initial Setup](./img/main.png)
+<p align="center">
+    <img src="blog/img/main.png" alt="Main screen" width="400"/>
+</p>
+
 
 ### Mobile View
 
-![Mobile View](./img/mobile.png)
-
-### Theme Selection with General Theme Activated
-
-![Theme Activated](./img/main.png)
-
-## Conclusion
-
-This 20 Questions AI game demonstrates the power of combining classic gameplay with modern AI capabilities. It highlights prompt engineering, state management, and user interaction design, making it a compelling project for any AI engineer portfolio.
+<p align="center">
+    <img src="blog/img/mobile.png" alt="Mobile display" width="400"/>
+</p>
 
 ---
 
