@@ -108,7 +108,7 @@ async askAIQuestion() {
 ### Mobile View
 
 <p align="center">
-    <img src="blog/img/mobile.png" alt="Mobile display" width="400"/>
+    <img src="blog/img/mobile.png" alt="Mobile display" width="300"/>
 </p>
 
 ---
