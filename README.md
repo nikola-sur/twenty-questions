@@ -111,6 +111,3 @@ async askAIQuestion() {
     <img src="blog/img/mobile.png" alt="Mobile display" width="300"/>
 </p>
 
----
-
-*Project repository:* [GitHub - nikola-sur/twenty-questions](https://github.com/nikola-sur/twenty-questions)
